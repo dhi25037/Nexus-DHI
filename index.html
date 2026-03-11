@@ -4,30 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus DHI | 학생회장 후보 박소진</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
     <style>
         :root {
-            --primary-blue: #0047AB;
-            --accent-blue: #38bdf8;
-            --dark-bg: #0a0f1d;
-            --text-white: #f8fafc;
+            --main-blue: #1d4ed8;
+            --light-blue: #3b82f6;
+            --bg-white: #ffffff;
+            --text-dark: #1e293b;
         }
 
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-white);
-            font-family: 'Pretendard', -apple-system, sans-serif;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Pretendard', sans-serif; color: var(--text-dark); background: var(--bg-white); line-height: 1.6; }
+
+        /* 첫 페이지: 포스터 섹션 */
+        .hero-poster {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f1f5f9;
+        }
+        .hero-poster img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
-        /* 1. 메인 슬로건 패럴랙스 섹션 */
-        .hero {
-            height: 300vh; /* 스크롤 길이를 위해 길게 설정 */
-            position: relative;
-        }
-
-        .sticky-wrapper {
+        /* 스크롤 애니메이션 섹션 */
+        .sticky-container { height: 300vh; position: relative; background: var(--text-dark); }
+        .sticky-box {
             position: sticky;
             top: 0;
             height: 100vh;
@@ -35,166 +41,121 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            color: white;
         }
-
-        .slogan-part {
+        .slogan-txt {
             position: absolute;
-            font-size: clamp(2rem, 8vw, 5rem);
-            font-weight: 800;
-            transition: all 0.5s ease-out;
-            white-space: nowrap;
+            font-size: clamp(2.5rem, 7vw, 6rem);
+            font-weight: 900;
+            transition: 0.1s;
         }
+        #txt-left { left: -50%; color: var(--light-blue); }
+        #txt-right { right: -50%; color: var(--light-blue); }
+        #txt-middle { opacity: 0; font-size: clamp(1.2rem, 3vw, 2.5rem); margin-top: 10px; }
 
-        #part-connect { left: -100%; color: var(--accent-blue); } /* 연결 */
-        #part-change { right: -100%; color: #60a5fa; } /* 변화 */
-        #part-bridge { opacity: 0; font-size: 1.5rem; color: #cbd5e1; } /* 로 만드는 */
-
-        /* 2. 공약 및 경력 섹션 */
-        .content-section {
-            padding: 100px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
+        /* 공약 섹션 */
+        .content { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
+        .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 60px; font-weight: 800; color: var(--main-blue); }
+        
+        .promise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .promise-card {
+            background: #f8fafc;
+            padding: 40px;
+            border-radius: 25px;
+            border-left: 8px solid var(--main-blue);
+            transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
+        .promise-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .promise-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--main-blue); }
+        .promise-card p { color: #475569; font-size: 1.1rem; }
 
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 50px;
-            color: var(--accent-blue);
-        }
+        /* 경력 섹션 */
+        .career-box { background: var(--main-blue); color: white; padding: 60px 20px; border-radius: 30px; margin-top: 50px; }
+        .career-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .career-list li { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center; }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            background: rgba(56, 189, 248, 0.1);
-        }
-
-        .card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--accent-blue);
-        }
-
-        /* 푸터/하단 버튼 */
-        footer {
-            text-align: center;
-            padding: 100px 0;
-            background: linear-gradient(to top, var(--primary-blue), transparent);
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background: var(--accent-blue);
-            color: var(--dark-bg);
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 50px;
-            font-size: 1.2rem;
-        }
-
+        footer { text-align: center; padding: 60px; color: #94a3b8; }
     </style>
 </head>
 <body>
 
-    <section class="hero">
-        <div class="sticky-wrapper" id="trigger">
-            <div id="part-connect" class="slogan-part">연결</div>
-            <div id="part-bridge" class="slogan-part">로 만드는</div>
-            <div id="part-change" class="slogan-part">변화</div>
-        </div>
+    <section class="hero-poster">
+        <img src="poster.png" alt="2026 DHI 학생회장 후보 박소진 포스터">
     </section>
 
-    <section class="content-section">
-        <h2 class="section-title">기호 0번 박소진 [cite: 2]</h2>
-        <div class="card" style="text-align: center; margin-bottom: 40px;">
-            <p style="font-size: 1.2rem; line-height: 1.8;">
-                대구강동초, 소선여중 학생회장을 거쳐 [cite: 12, 13]<br>
-                이제 DHI의 새로운 연결을 만듭니다. [cite: 1]
-            </p>
+    <div class="sticky-container">
+        <div class="sticky-box">
+            <div id="txt-left" class="slogan-txt">연결</div>
+            <div id="txt-middle" class="slogan-txt">로 만드는</div>
+            <div id="txt-right" class="slogan-txt">변화</div>
+        </div>
+    </div>
+
+    <section class="content">
+        <h2 class="section-title">주요 공약 리스트</h2>
+        <div class="promise-grid">
+            <div class="promise-card">
+                <h3>글로벌 리더의 경험 </h3>
+                <p>TEDx DHI 공식 개최를 통해 우리들의 목소리를 세계로 연결하겠습니다. </p>
+            </div>
+            <div class="promise-card">
+                <h3>학생 편의의 혁신 [cite: 6, 7]</h3>
+                <p>학생증 디자인 공모전 및 체크카드 기능을 도입하여 실용적인 학교 생활을 만듭니다. [cite: 6, 7]</p>
+            </div>
+            <div class="promise-card">
+                <h3>우리의 스타일 [cite: 8, 9]</h3>
+                <p>교복 점퍼 디자인 개선 및 정장형 교복 비치를 통해 DHI의 자부심을 높이겠습니다. [cite: 8, 9]</p>
+            </div>
+            <div class="promise-card">
+                <h3>주도적인 학습 [cite: 4, 5]</h3>
+                <p>내가 만드는 방과후 수업과 도전학기제 운영으로 학습 선택권을 보장합니다. [cite: 4, 5]</p>
+            </div>
+            <div class="promise-card">
+                <h3>자치권 강화 [cite: 10]</h3>
+                <p>동아리 연합회 결성으로 학생 자치 활동의 새로운 변화를 이끌겠습니다. [cite: 10]</p>
+            </div>
         </div>
 
-        <div class="grid">
-            <div class="card">
-                <h3>주요 경력 [cite: 11]</h3>
-                <ul>
-                    <li>• 수성구 청소년참여위원회 부위원장 [cite: 14]</li>
-                    <li>• 한국 문화유산 홍보대사 [cite: 15]</li>
-                    <li>• KAIST 영재기업인교육원 수료 [cite: 16]</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>핵심 공약 [cite: 1]</h3>
-                <ul>
-                    <li>• TEDx DHI 공식 개최 [cite: 3]</li>
-                    <li>• 학생증 체크카드 기능 도입 [cite: 7]</li>
-                    <li>• 교복 및 점퍼 디자인 개선 [cite: 8, 9]</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <h2 class="section-title">주요 약속 [cite: 1]</h2>
-        <div class="grid">
-            <div class="card"><h3>내 손으로 만드는 수업</h3><p>내가 만드는 방과후 및 도전학기제 운영 [cite: 4, 5]</p></div>
-            <div class="card"><h3>학생 자치 강화</h3><p>동아리 연합회 결성 및 소통 창구 확대 [cite: 10]</p></div>
-            <div class="card"><h3>DHI 아이덴티티</h3><p>학생증 디자인 공모전 개최 [cite: 6]</p></div>
+        <div class="career-box">
+            <h2 style="text-align: center; margin-bottom: 30px;">박소진의 검증된 리더십</h2>
+            <ul class="career-list">
+                <li>대구강동초 학생회장 [cite: 12]</li>
+                <li>소선여중 학생회장 [cite: 13]</li>
+                <li>수성구 청소년참여위 부위원장 [cite: 14]</li>
+                <li>KAIST 영재기업인교육원 수료 [cite: 16]</li>
+            </ul>
         </div>
     </section>
 
     <footer>
-        <p style="margin-bottom: 20px;">더 자세한 공약이 궁금하다면?</p>
-        <a href="http://dhi.kro.kr" class="cta-button">dhi.kro.kr 방문하기 [cite: 18]</a>
+        <p>Nexus DHI - 연결로 만드는 변화</p>
+        <p>© 2026 Student President Candidate Park So-jin</p>
     </footer>
 
     <script>
         window.addEventListener('scroll', () => {
-            const scrollPercent = window.scrollY / (document.body.offsetHeight - window.innerHeight);
-            const step = window.scrollY / window.innerHeight;
+            const container = document.querySelector('.sticky-container');
+            const offset = window.pageYOffset - container.offsetTop;
+            const progress = offset / window.innerHeight;
 
-            const connect = document.getElementById('part-connect');
-            const change = document.getElementById('part-change');
-            const bridge = document.getElementById('part-bridge');
+            if (progress > 0 && progress < 2) {
+                const left = document.getElementById('txt-left');
+                const right = document.getElementById('txt-right');
+                const middle = document.getElementById('txt-middle');
 
-            // 1단계: 연결(왼쪽), 변화(오른쪽) 등장
-            if (step < 1) {
-                connect.style.left = `${(step * 100) - 70}%`;
-                change.style.right = `${(step * 100) - 70}%`;
-                connect.style.transform = 'translateX(0)';
-                change.style.transform = 'translateX(0)';
-                bridge.style.opacity = '0';
-            } 
-            // 2단계: 위치 고정 및 '로 만드는' 등장
-            else if (step >= 1 && step < 2) {
-                connect.style.left = '50%';
-                connect.style.transform = 'translateX(-180%)';
-                change.style.right = '50%';
-                change.style.transform = 'translateX(180%)';
+                // 슬로건 합치기 로직
+                let pos = (progress * 50) - 50; 
+                if (pos > 0) pos = 0;
                 
-                const bridgeOpacity = (step - 1);
-                bridge.style.opacity = bridgeOpacity;
-            }
-            // 3단계: 완성된 슬로건
-            else {
-                connect.style.left = '50%';
-                connect.style.transform = 'translateX(-180%)';
-                change.style.right = '50%';
-                change.style.transform = 'translateX(180%)';
-                bridge.style.opacity = '1';
+                left.style.left = `calc(50% + ${pos - 15}%)`;
+                right.style.right = `calc(50% + ${pos - 15}%)`;
+
+                if (progress > 1.2) {
+                    middle.style.opacity = (progress - 1.2) * 5;
+                } else {
+                    middle.style.opacity = 0;
+                }
             }
         });
     </script>
