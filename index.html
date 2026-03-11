@@ -3,672 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>프롬프트 엔지니어링 시작하기</title>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link href="https://cdn.jsdelivr.net/gh/toss/d2coding/css/d2coding.css" rel="stylesheet" type="text/css" />
+    <title>Nexus DHI | 학생회장 후보 박소진</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
     <style>
         :root {
-            --bg-color: #121212;
-            --text-color: #F5F5F5;
-            --accent-color: #00BFFF;
-            --muted-color: #888888;
-            --surface-color: #1E1E1E;
+            --primary-blue: #0047AB;
+            --accent-blue: #38bdf8;
+            --dark-bg: #0a0f1d;
+            --text-white: #f8fafc;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-white);
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-            overflow: hidden; /* Prevent scrollbars on body */
-        }
-
-        .presentation-container {
-            width: 100%;
-            height: 100%;
+        /* 1. 메인 슬로건 패럴랙스 섹션 */
+        .hero {
+            height: 300vh; /* 스크롤 길이를 위해 길게 설정 */
             position: relative;
         }
 
-        .slide {
-            width: 100%;
-            height: 100%;
+        .sticky-wrapper {
+            position: sticky;
+            top: 0;
+            height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 5vw;
+            overflow: hidden;
+        }
+
+        .slogan-part {
             position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.8s ease-in-out, visibility 0.8s;
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 800;
+            transition: all 0.5s ease-out;
+            white-space: nowrap;
+        }
+
+        #part-connect { left: -100%; color: var(--accent-blue); } /* 연결 */
+        #part-change { right: -100%; color: #60a5fa; } /* 변화 */
+        #part-bridge { opacity: 0; font-size: 1.5rem; color: #cbd5e1; } /* 로 만드는 */
+
+        /* 2. 공약 및 경력 섹션 */
+        .content-section {
+            padding: 100px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
             text-align: center;
+            margin-bottom: 50px;
+            color: var(--accent-blue);
         }
 
-        .slide.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        /* Slide Content Animation */
-        .slide .content {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-in-out 0.4s, transform 0.8s ease-in-out 0.4s;
-        }
-        .slide.active .content {
-            opacity: 1;
-            transform: translateY(0);
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
-
-        /* Typography */
-        h1 {
-            font-size: clamp(32px, 5vw, 64px);
-            font-weight: 700;
-        }
-
-        h2 {
-            font-size: clamp(24px, 3vw, 36px);
-            font-weight: 600;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-
-        p, li {
-            font-size: clamp(16px, 1.5vw, 18px);
-            font-weight: 400;
-            line-height: 1.7;
-            max-width: 800px;
-        }
-        
-        .caption {
-             font-size: clamp(12px, 1vw, 14px);
-             font-weight: 300;
-             color: var(--muted-color);
-             margin-top: 10px;
-        }
-
-        /* --- UI Elements --- */
-        #fullscreen-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 1001;
-        }
-        #fullscreen-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--muted-color);
-            transition: fill 0.3s ease-in-out;
-        }
-        #fullscreen-btn:hover svg {
-             fill: var(--text-color);
-        }
-
-
-        #slide-nav {
-            position: fixed;
-            left: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 1000;
-        }
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            background-color: var(--muted-color);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-        }
-        .nav-dot:hover {
-            background-color: var(--accent-color);
-        }
-        .nav-dot.active {
-            background-color: var(--text-color);
-            transform: scale(1.2);
-        }
-
-        /* --- Specific Slide Styles --- */
-        
-        /* Slide 1: Title */
-        .slide-1 h1 { margin-bottom: 10px; }
-        .slide-1 h2 { color: var(--text-color); font-weight: 400; }
-
-        /* Slide 2: Why */
-        .slide-2 .grid { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: center; width: 100%; max-width: 1000px;}
-        .slide-2 .icon-wrapper { font-size: 100px; }
-        .slide-2 .text-content { text-align: left;}
-        .highlight { color: var(--accent-color); font-weight: 600; }
-        
-        /* Slide 3: Before/After */
-        .slide-3 .comparison { display: flex; gap: 40px; width: 100%; max-width: 1200px; }
-        .card { flex: 1; background: var(--surface-color); padding: 30px; border-radius: 10px; text-align: left;}
-        .card h3 { font-size: 24px; font-weight: 600; margin-bottom: 20px; }
-        .card pre {
-            background: #282c34;
-            padding: 15px;
-            border-radius: 5px;
-            font-family: 'D2Coding', monospace;
-            white-space: pre-wrap;
-            word-break: break-all;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-        .card .result { border-left: 3px solid var(--accent-color); padding-left: 15px; font-style: italic; }
-        .card.before { filter: grayscale(50%); opacity: 0.7; }
-        
-        /* Slide 4: How it works */
-        .infographic-flow { display: flex; align-items: center; gap: 20px; margin-top: 40px; }
-        .flow-box {
-            padding: 20px 40px;
-            background: var(--surface-color);
-            border: 1px solid var(--muted-color);
-            border-radius: 8px;
-            position: relative;
-        }
-        .flow-arrow {
-            width: 50px;
-            height: 3px;
-            background: var(--accent-color);
-            position: relative;
-        }
-        .flow-arrow::after {
-            content: '';
-            position: absolute;
-            right: -2px;
-            top: -6px;
-            width: 0;
-            height: 0;
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent;
-            border-left: 10px solid var(--accent-color);
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0.5); }
-            70% { box-shadow: 0 0 10px 20px rgba(0, 191, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0); }
-        }
-        .flow-box.llm { animation: pulse 2s infinite; }
-
-        /* Slide 5: Checklist */
-        .checklist { list-style: none; text-align: left; max-width: 400px; margin-top: 30px; }
-        .checklist li {
-            padding: 15px;
-            margin-bottom: 10px;
-            background: var(--surface-color);
-            border-radius: 5px;
-            border-left: 3px solid var(--accent-color);
-            transition: transform 0.3s ease-in-out;
-        }
-        .checklist li::before {
-             content: '✓';
-             margin-right: 15px;
-             color: var(--accent-color);
-             font-weight: 700;
-        }
-        
-        /* Slide 7: Chain of Thought */
-        .cot-steps {
-            background: var(--surface-color);
+        .card {
+            background: rgba(255, 255, 255, 0.05);
             padding: 30px;
-            border-radius: 10px;
-            margin-top: 20px;
-            text-align: left;
-            border: 1px solid #333;
-        }
-         .cot-steps pre { background: #282c34; padding: 15px; border-radius: 5px; font-family: 'D2Coding', monospace; white-space: pre-wrap; }
-        .cot-steps ol { padding-left: 20px; margin-top: 20px;}
-        .cot-steps ol li { margin-bottom: 10px; opacity: 0; transition: opacity 0.5s ease-in-out; }
-        .slide.active .cot-steps ol li:nth-child(1) { transition-delay: 0.5s; opacity: 1; }
-        .slide.active .cot-steps ol li:nth-child(2) { transition-delay: 1.0s; opacity: 1; }
-        .slide.active .cot-steps ol li:nth-child(3) { transition-delay: 1.5s; opacity: 1; }
-
-
-        /* Slide 9: Interactive Demo */
-        .interactive-demo {
-            display: flex;
-            gap: 20px;
-            width: 100%;
-            max-width: 1200px;
-            align-items: flex-start;
-        }
-        .demo-input, .demo-output {
-            flex: 1;
-            background: var(--surface-color);
-            padding: 20px;
-            border-radius: 10px;
-            height: 400px;
-            display: flex;
-            flex-direction: column;
-        }
-        .demo-input textarea {
-            flex-grow: 1;
-            background: #282c34;
-            border: 1px solid var(--muted-color);
-            border-radius: 5px;
-            color: var(--text-color);
-            font-family: 'D2Coding', monospace;
-            padding: 15px;
-            resize: none;
-            font-size: 16px;
-            margin-top: 15px;
-        }
-        .demo-input button {
-            background-color: var(--accent-color);
-            color: #fff;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            margin-top: 15px;
-            transition: background-color 0.2s ease;
-        }
-        .demo-input button:active { background-color: #008fcc; }
-        .demo-output .result-content { 
-            flex-grow: 1;
-            background: #282c34;
-            padding: 15px;
-            border-radius: 5px;
-            white-space: pre-wrap;
-            overflow-y: auto;
-            margin-top: 15px;
-            text-align: left;
-        }
-        
-        /* Slide 10: Advanced */
-        .advanced-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 1000px;
-            margin-top: 30px;
-        }
-        .advanced-item {
-            background: var(--surface-color);
-            padding: 25px;
-            border-radius: 8px;
-        }
-        .advanced-item h3 { font-size: 20px; color: var(--accent-color); margin-bottom: 10px;}
-
-        /* Slide 11: Ethics */
-        .ethics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            width: 100%;
-            max-width: 1000px;
-        }
-        .ethics-item svg { width: 48px; height: 48px; fill: var(--accent-color); margin-bottom: 15px;}
-        .ethics-item h3 { font-size: 20px; margin-bottom: 5px; }
-        
-        /* Slide 12: Finale */
-        .takeaway-list {
-            margin: 30px 0;
-            list-style: none;
-            display: inline-flex;
-            flex-direction: column;
-            gap: 15px;
-            text-align: left;
-        }
-        .takeaway-list li::before {
-            content: '→';
-            margin-right: 15px;
-            color: var(--accent-color);
-            font-weight: 700;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
         }
 
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(56, 189, 248, 0.1);
+        }
 
-        @media (max-width: 768px) {
-            .slide-2 .grid, .slide-3 .comparison, .interactive-demo {
-                grid-template-columns: 1fr;
-                flex-direction: column;
-            }
-            .slide-2 .text-content {
-                text-align: center;
-            }
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--accent-blue);
+        }
+
+        /* 푸터/하단 버튼 */
+        footer {
+            text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(to top, var(--primary-blue), transparent);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--accent-blue);
+            color: var(--dark-bg);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            font-size: 1.2rem;
         }
 
     </style>
 </head>
 <body>
 
-    <div class="presentation-container" id="presentation-container">
+    <section class="hero">
+        <div class="sticky-wrapper" id="trigger">
+            <div id="part-connect" class="slogan-part">연결</div>
+            <div id="part-bridge" class="slogan-part">로 만드는</div>
+            <div id="part-change" class="slogan-part">변화</div>
+        </div>
+    </section>
 
-        <!-- Slide 1: Title -->
-        <section class="slide slide-1 active">
-            <div class="content">
-                <h1 style="color: var(--accent-color);">The Art of Talking to AI</h1>
-                <h1>프롬프트 엔지니어링 시작하기</h1>
-            </div>
-        </section>
+    <section class="content-section">
+        <h2 class="section-title">기호 0번 박소진 [cite: 2]</h2>
+        <div class="card" style="text-align: center; margin-bottom: 40px;">
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+                대구강동초, 소선여중 학생회장을 거쳐 [cite: 12, 13]<br>
+                이제 DHI의 새로운 연결을 만듭니다. [cite: 1]
+            </p>
+        </div>
 
-        <!-- Slide 2: Problem (Why?) -->
-        <section class="slide slide-2">
-            <div class="content grid">
-                <div class="icon-wrapper">?</div>
-                <div class="text-content">
-                    <h2>AI에게 원하는 답을<br>얻어내는 기술</h2>
-                    <p>단순한 질문에서 <span class="highlight">정확하고 창의적인 결과물</span>을 이끌어내는 열쇠입니다.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Slide 3: Importance (So What?) -->
-        <section class="slide slide-3">
-            <div class="content comparison">
-                <div class="card before">
-                    <h3>BEFORE</h3>
-                    <pre>블로그 글 써줘</pre>
-                    <div class="result">
-                        <p>인공지능은 현대 사회의 중요한 기술입니다. 많은 분야에서 활용되며 우리의 삶을 바꾸고 있습니다...</p>
-                    </div>
-                </div>
-                <div class="card after">
-                    <h3>AFTER</h3>
-                    <pre>MZ세대를 타겟으로, '프롬프트 엔지니어링'의 중요성을 설명하는 500자 분량의 친근한 말투 블로그 글 초안을 작성해줘.</pre>
-                    <div class="result">
-                        <p>요즘 AI랑 대화 좀 해봤어? 🤖 '프롬프트 엔지니어링'만 알면, AI를 그냥 똑똑한 비서가 아니라 내 아이디어를 현실로 만드는 신의 손으로 만들 수 있어! 더 이상 동문서답은 그만!...</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Slide 4: How it works? -->
-        <section class="slide slide-4">
-            <div class="content">
-                <h2>AI는 어떻게 내 말을 알아들을까?</h2>
-                <div class="infographic-flow">
-                    <div class="flow-box">사용자 입력 (Prompt)</div>
-                    <div class="flow-arrow"></div>
-                    <div class="flow-box llm">거대 언어 모델 (LLM) 분석</div>
-                    <div class="flow-arrow"></div>
-                    <div class="flow-box">결과물 생성 (Response)</div>
-                </div>
-                <p class="caption">AI는 입력을 분석하여, 확률적으로 가장 적합한 다음 단어를 예측하며 문장을 생성합니다.</p>
-            </div>
-        </section>
-
-        <!-- Slide 5: Golden Rule 1 -->
-        <section class="slide slide-5">
-            <div class="content">
-                <h2>명령이 아닌, 소통을 하세요</h2>
-                <p>좋은 프롬프트의 핵심은 <span class="highlight">명확성(Clarity)</span>과 <span class="highlight">구체성(Specificity)</span>입니다.</p>
-                <ul class="checklist">
-                    <li>배경 정보 (Context)</li>
-                    <li>목표 (Objective)</li>
-                    <li>형식 (Format)</li>
-                    <li>제약 조건 (Constraints)</li>
+        <div class="grid">
+            <div class="card">
+                <h3>주요 경력 [cite: 11]</h3>
+                <ul>
+                    <li>• 수성구 청소년참여위원회 부위원장 [cite: 14]</li>
+                    <li>• 한국 문화유산 홍보대사 [cite: 15]</li>
+                    <li>• KAIST 영재기업인교육원 수료 [cite: 16]</li>
                 </ul>
             </div>
-        </section>
-
-        <!-- Slide 6: Technique 1 - Role-Playing -->
-        <section class="slide slide-6">
-            <div class="content comparison">
-                 <div class="card before">
-                    <h3>Bad 👎</h3>
-                    <pre>이 코드 설명해줘.</pre>
-                </div>
-                <div class="card after">
-                    <h3>Good 👍</h3>
-                    <pre>당신은 10년차 파이썬 개발자입니다. 아래 코드가 어떤 원리로 동작하는지, 주니어 개발자가 이해하기 쉽게 단계별로 설명해주세요.</pre>
-                </div>
-            </div>
-             <h2 style="margin-top: 30px;">AI에게 가면을 씌워라: 페르소나 프롬프팅</h2>
-        </section>
-        
-        <!-- Slide 7: Technique 2 - Chain of Thought -->
-        <section class="slide slide-7">
-            <div class="content">
-                <h2>스스로 생각하게 만들기: 단계별 사고 (Step-by-Step)</h2>
-                <div class="cot-steps">
-                    <pre>"A, B, C 세 후보의 득표수는 각각 11표, 25표, 14표다. 전체 득표수에서 각 후보의 득표율을 계산해줘. 단계별로 생각하고 설명해줘."</pre>
-                    <ol>
-                        <li>1단계 (총합 계산): 11 + 25 + 14 = 50표</li>
-                        <li>2단계 (A후보 계산): (11 / 50) * 100 = 22%</li>
-                        <li>3단계 (B,C후보 계산): ... 이런 식으로 계속</li>
-                    </ol>
-                </div>
-            </div>
-        </section>
-
-        <!-- Slide 8: Technique 3 - Few-Shot -->
-        <section class="slide slide-8">
-            <div class="content">
-                <h2>백문이 불여일견: 예시 제공 (Few-Shot)</h2>
-                 <div class="card after" style="max-width: 800px; margin: 0 auto; margin-top: 30px;">
-                    <pre>
-다음과 같이 문장의 긍정/부정을 판단해줘.
-
-문장: "이 영화는 정말 최고였어!"
-판단: 긍정
-
-문장: "음식이 너무 짜고 서비스도 별로였어요."
-판단: 부정
----
-문장: "배송이 빨라서 만족스러웠습니다."
-판단: <span id="few-shot-result"></span>
-                    </pre>
-                </div>
-            </div>
-        </section>
-
-        <!-- Slide 9: Interactive 실습 -->
-        <section class="slide slide-9">
-            <div class="content">
-                <h2>이제 당신 차례입니다 (Your Turn!)</h2>
-                <p>목표: "AI 기반 자동 코딩 어시스턴트" 제품의 SNS 광고 문구를 3가지 버전으로 생성하세요.</p>
-                <div class="interactive-demo" style="margin-top: 20px;">
-                    <div class="demo-input">
-                        <h3>프롬프트 입력</h3>
-                        <textarea id="prompt-input" placeholder="여기에 프롬프트를 입력해보세요.&#10;예: 인스타그램에 올릴 AI 코딩 어시스턴트 광고 문구 3개 만들어줘. 타겟은 개발자고, 핵심 기능(자동완성, 버그수정)을 강조해줘. 이모지도 넣어줘!"></textarea>
-                        <button id="generate-btn">생성하기</button>
-                    </div>
-                    <div class="demo-output">
-                        <h3>생성 결과</h3>
-                        <div id="prompt-output" class="result-content">결과는 여기에 표시됩니다.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Slide 10: Advanced -->
-        <section class="slide slide-10">
-            <div class="content">
-                <h2>Beyond the Basics</h2>
-                <p>프롬프트 엔지니어링의 세계는 여기서 끝나지 않습니다.</p>
-                <div class="advanced-grid">
-                    <div class="advanced-item">
-                        <h3>Zero-Shot CoT</h3>
-                        <p>AI에게 "단계별로 생각하자"고 말해 스스로 생각의 연쇄를 유도하는 기술</p>
-                    </div>
-                    <div class="advanced-item">
-                        <h3>ReAct</h3>
-                        <p>생각하고(Thought), 행동하고(Action), 관찰하며(Observation) 추론하는 프레임워크</p>
-                    </div>
-                    <div class="advanced-item">
-                        <h3>Tree of Thoughts</h3>
-                        <p>하나의 생각이 아닌, 여러 가능성을 트리 구조로 탐색하여 최적의 답을 찾는 기법</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Slide 11: Ethics -->
-        <section class="slide slide-11">
-            <div class="content">
-                <h2>강력한 도구, 현명한 사용자</h2>
-                <p>AI를 사용할 때 반드시 고려해야 할 윤리적 책임입니다.</p>
-                <div class="ethics-grid" style="margin-top: 40px;">
-                    <div class="ethics-item">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>
-                        <h3>편향 (Bias)</h3>
-                        <p>학습 데이터의 편향을 증폭시키지 않도록 주의해야 합니다.</p>
-                    </div>
-                     <div class="ethics-item">
-                        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"></path></svg>
-                        <h3>개인정보 (Privacy)</h3>
-                        <p>절대 민감하거나 개인적인 정보를 입력하지 마세요.</p>
-                    </div>
-                     <div class="ethics-item">
-                        <svg viewBox="0 0 24 24"><path d="M14.5 9A1.5 1.5 0 1 0 16 10.5 1.5 1.5 0 0 0 14.5 9zM8.5 9A1.5 1.5 0 1 0 10 10.5 1.5 1.5 0 0 0 8.5 9zm3.5 9.5c-2.33 0-4.32-1.45-5.12-3.5h10.24c-.8 2.05-2.79 3.5-5.12 3.5zm7.5-12.5c0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8 8-3.58 8-8zm-2 0c0 3.31-2.69 6-6 6s-6-2.69-6-6 2.69-6 6-6 6 2.69 6 6z"></path></svg>
-                        <h3>환각 (Hallucination)</h3>
-                        <p>AI는 그럴듯한 거짓말을 할 수 있으니, 사실 확인은 필수입니다.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Slide 12: Finale -->
-        <section class="slide slide-12">
-            <div class="content">
-                <h1>당신의 아이디어가 AI를 만날 때</h1>
-                <ul class="takeaway-list">
-                    <li>명확하게 소통하라</li>
-                    <li>역할과 예시를 부여하라</li>
-                    <li>끊임없이 실험하고 개선하라</li>
+            <div class="card">
+                <h3>핵심 공약 [cite: 1]</h3>
+                <ul>
+                    <li>• TEDx DHI 공식 개최 [cite: 3]</li>
+                    <li>• 학생증 체크카드 기능 도입 [cite: 7]</li>
+                    <li>• 교복 및 점퍼 디자인 개선 [cite: 8, 9]</li>
                 </ul>
-                <h2 style="margin-top: 40px;">Thank You</h2>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </div>
+    <section class="content-section">
+        <h2 class="section-title">주요 약속 [cite: 1]</h2>
+        <div class="grid">
+            <div class="card"><h3>내 손으로 만드는 수업</h3><p>내가 만드는 방과후 및 도전학기제 운영 [cite: 4, 5]</p></div>
+            <div class="card"><h3>학생 자치 강화</h3><p>동아리 연합회 결성 및 소통 창구 확대 [cite: 10]</p></div>
+            <div class="card"><h3>DHI 아이덴티티</h3><p>학생증 디자인 공모전 개최 [cite: 6]</p></div>
+        </div>
+    </section>
 
-    <!-- UI -->
-    <nav id="slide-nav"></nav>
-    <button id="fullscreen-btn">
-        <svg id="fullscreen-open" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"></path></svg>
-        <svg id="fullscreen-close" viewBox="0 0 24 24" style="display: none;"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"></path></svg>
-    </button>
-    
+    <footer>
+        <p style="margin-bottom: 20px;">더 자세한 공약이 궁금하다면?</p>
+        <a href="http://dhi.kro.kr" class="cta-button">dhi.kro.kr 방문하기 [cite: 18]</a>
+    </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const slides = document.querySelectorAll('.slide');
-            const navContainer = document.getElementById('slide-nav');
-            let currentSlide = 0;
-            let isTyping = false;
+        window.addEventListener('scroll', () => {
+            const scrollPercent = window.scrollY / (document.body.offsetHeight - window.innerHeight);
+            const step = window.scrollY / window.innerHeight;
 
-            // Create nav dots
-            slides.forEach((_, index) => {
-                const dot = document.createElement('div');
-                dot.classList.add('nav-dot');
-                dot.dataset.slide = index;
-                navContainer.appendChild(dot);
-                dot.addEventListener('click', () => goToSlide(index));
-            });
+            const connect = document.getElementById('part-connect');
+            const change = document.getElementById('part-change');
+            const bridge = document.getElementById('part-bridge');
 
-            const navDots = document.querySelectorAll('.nav-dot');
-
-            const goToSlide = (slideIndex) => {
-                if (slideIndex < 0 || slideIndex >= slides.length) return;
+            // 1단계: 연결(왼쪽), 변화(오른쪽) 등장
+            if (step < 1) {
+                connect.style.left = `${(step * 100) - 70}%`;
+                change.style.right = `${(step * 100) - 70}%`;
+                connect.style.transform = 'translateX(0)';
+                change.style.transform = 'translateX(0)';
+                bridge.style.opacity = '0';
+            } 
+            // 2단계: 위치 고정 및 '로 만드는' 등장
+            else if (step >= 1 && step < 2) {
+                connect.style.left = '50%';
+                connect.style.transform = 'translateX(-180%)';
+                change.style.right = '50%';
+                change.style.transform = 'translateX(180%)';
                 
-                slides[currentSlide].classList.remove('active');
-                navDots[currentSlide].classList.remove('active');
-                
-                currentSlide = slideIndex;
-                
-                slides[currentSlide].classList.add('active');
-                navDots[currentSlide].classList.add('active');
-                
-                // Special actions for specific slides
-                if (currentSlide === 7 && !isTyping) { // Slide 8 (Few-Shot)
-                    typeFewShotResult();
-                }
-            };
-
-            const typeFewShotResult = () => {
-                const target = document.getElementById('few-shot-result');
-                if (!target) return;
-                
-                isTyping = true;
-                target.innerHTML = '';
-                const textToType = '긍정';
-                let i = 0;
-                
-                const typingEffect = setInterval(() => {
-                    if (i < textToType.length) {
-                        target.innerHTML += textToType.charAt(i);
-                        i++;
-                    } else {
-                        clearInterval(typingEffect);
-                        isTyping = false;
-                    }
-                }, 150);
-            };
-            
-
-            // Keyboard navigation
-            window.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                    goToSlide(currentSlide + 1);
-                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                    goToSlide(currentSlide - 1);
-                }
-            });
-
-            // Initial setup
-            goToSlide(0);
-
-            // Fullscreen functionality
-            const fullscreenBtn = document.getElementById('fullscreen-btn');
-            const openIcon = document.getElementById('fullscreen-open');
-            const closeIcon = document.getElementById('fullscreen-close');
-            const docEl = document.documentElement;
-
-            fullscreenBtn.addEventListener('click', () => {
-                if (!document.fullscreenElement) {
-                    if (docEl.requestFullscreen) docEl.requestFullscreen();
-                } else {
-                    if (document.exitFullscreen) document.exitFullscreen();
-                }
-            });
-            
-            document.addEventListener('fullscreenchange', () => {
-                const isFullscreen = !!document.fullscreenElement;
-                openIcon.style.display = isFullscreen ? 'none' : 'block';
-                closeIcon.style.display = isFullscreen ? 'block' : 'none';
-            });
-
-            // Interactive Demo Logic
-            const generateBtn = document.getElementById('generate-btn');
-            const promptInput = document.getElementById('prompt-input');
-            const promptOutput = document.getElementById('prompt-output');
-
-            generateBtn.addEventListener('click', () => {
-                const inputText = promptInput.value.trim();
-                promptOutput.textContent = '생성 중...';
-                
-                setTimeout(() => {
-                    if (inputText.length < 10) {
-                         promptOutput.textContent = `1. AI 코딩 도우미, 지금 바로 경험하세요!\n2. 코딩이 막힐 땐? 우리 AI 친구를 불러봐!\n3. 개발자의 삶의 질을 높여줄 단 하나의 솔루션.`;
-                    } else {
-                        promptOutput.textContent = `1. 💻🔥 코딩하다 막혔어? 이젠 걱정 끝! AI 코딩 어시스턴트가 실시간으로 버그 잡고 코드 완성까지! #개발자 #필수템 #코딩신세계\n\n2. 🚀 내 코드에 날개를 달아줄 AI 페어 프로그래머 등장! 복붙은 이제 그만, 아이디어만 말해봐! #AI코딩 #칼퇴요정 #개발자그램\n\n3. ✨ "이거 어떻게 짜야하지..?" 고민할 시간에 커피 한 잔 더! ☕ 놀라운 자동완성, 스마트한 버그 수정. 당신의 코딩은 오늘부터 달라집니다. #코딩도우미 #생산성폭발`;
-                    }
-                }, 1000);
-            });
+                const bridgeOpacity = (step - 1);
+                bridge.style.opacity = bridgeOpacity;
+            }
+            // 3단계: 완성된 슬로건
+            else {
+                connect.style.left = '50%';
+                connect.style.transform = 'translateX(-180%)';
+                change.style.right = '50%';
+                change.style.transform = 'translateX(180%)';
+                bridge.style.opacity = '1';
+            }
         });
     </script>
-
 </body>
 </html>
