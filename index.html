@@ -6,84 +6,34 @@
     <title>Nexus DHI | 학생회장 후보 박소진</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
     <style>
-        :root {
-            --main-blue: #1d4ed8;
-            --light-blue: #3b82f6;
-            --bg-white: #ffffff;
-            --text-dark: #1e293b;
-        }
-
+        :root { --main-blue: #1d4ed8; --light-blue: #3b82f6; --bg-white: #ffffff; --text-dark: #1e293b; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Pretendard', sans-serif; color: var(--text-dark); background: var(--bg-white); line-height: 1.6; }
-
-        /* 첫 페이지: 포스터 섹션 */
-        .hero-poster {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f1f5f9;
-        }
-        .hero-poster img {
-            max-width: 90%;
-            max-height: 80vh;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        /* 스크롤 애니메이션 섹션 */
+        body { font-family: 'Pretendard', sans-serif; color: var(--text-dark); background: var(--bg-white); line-height: 1.6; overflow-x: hidden; }
+        .hero-poster { height: 100vh; display: flex; justify-content: center; align-items: center; background: #f1f5f9; }
+        .hero-poster img { max-width: 90%; max-height: 80vh; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .sticky-container { height: 300vh; position: relative; background: var(--text-dark); }
-        .sticky-box {
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            color: white;
-        }
-        .slogan-txt {
-            position: absolute;
-            font-size: clamp(2.5rem, 7vw, 6rem);
-            font-weight: 900;
-            transition: 0.1s;
-        }
+        .sticky-box { position: sticky; top: 0; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; color: white; }
+        .slogan-txt { position: absolute; font-size: clamp(2.5rem, 7vw, 6rem); font-weight: 900; transition: 0.1s; }
         #txt-left { left: -50%; color: var(--light-blue); }
         #txt-right { right: -50%; color: var(--light-blue); }
         #txt-middle { opacity: 0; font-size: clamp(1.2rem, 3vw, 2.5rem); margin-top: 10px; }
-
-        /* 공약 섹션 */
         .content { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
         .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 60px; font-weight: 800; color: var(--main-blue); }
-        
         .promise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .promise-card {
-            background: #f8fafc;
-            padding: 40px;
-            border-radius: 25px;
-            border-left: 8px solid var(--main-blue);
-            transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
+        .promise-card { background: #f8fafc; padding: 40px; border-radius: 25px; border-left: 8px solid var(--main-blue); transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .promise-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         .promise-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--main-blue); }
-        .promise-card p { color: #475569; font-size: 1.1rem; }
-
-        /* 경력 섹션 */
         .career-box { background: var(--main-blue); color: white; padding: 60px 20px; border-radius: 30px; margin-top: 50px; }
         .career-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
         .career-list li { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center; }
-
         footer { text-align: center; padding: 60px; color: #94a3b8; }
     </style>
 </head>
 <body>
 
     <section class="hero-poster">
-        <img src="poster.png" alt="2026 DHI 학생회장 후보 박소진 포스터">
+        <img src="https://github.com/dhi25037/Nexus-DHI/blob/main/poster.png?raw=true" alt="박소진 포스터">
     </section>
-
     <div class="sticky-container">
         <div class="sticky-box">
             <div id="txt-left" class="slogan-txt">연결</div>
@@ -95,26 +45,11 @@
     <section class="content">
         <h2 class="section-title">주요 공약 리스트</h2>
         <div class="promise-grid">
-            <div class="promise-card">
-                <h3>글로벌 리더의 경험 </h3>
-                <p>TEDx DHI 공식 개최를 통해 우리들의 목소리를 세계로 연결하겠습니다. </p>
-            </div>
-            <div class="promise-card">
-                <h3>학생 편의의 혁신 [cite: 6, 7]</h3>
-                <p>학생증 디자인 공모전 및 체크카드 기능을 도입하여 실용적인 학교 생활을 만듭니다. [cite: 6, 7]</p>
-            </div>
-            <div class="promise-card">
-                <h3>우리의 스타일 [cite: 8, 9]</h3>
-                <p>교복 점퍼 디자인 개선 및 정장형 교복 비치를 통해 DHI의 자부심을 높이겠습니다. [cite: 8, 9]</p>
-            </div>
-            <div class="promise-card">
-                <h3>주도적인 학습 [cite: 4, 5]</h3>
-                <p>내가 만드는 방과후 수업과 도전학기제 운영으로 학습 선택권을 보장합니다. [cite: 4, 5]</p>
-            </div>
-            <div class="promise-card">
-                <h3>자치권 강화 [cite: 10]</h3>
-                <p>동아리 연합회 결성으로 학생 자치 활동의 새로운 변화를 이끌겠습니다. [cite: 10]</p>
-            </div>
+            <div class="promise-card"><h3>TEDx DHI 개최</h3><p>우리들의 목소리를 세계로 연결하겠습니다. [cite: 3]</p></div>
+            <div class="promise-card"><h3>내 손으로 만드는 수업</h3><p>방과후 수업과 도전학기제 운영으로 선택권을 보장합니다. [cite: 4, 5]</p></div>
+            <div class="promise-card"><h3>디자인 혁신</h3><p>학생증 디자인 공모전 및 체크카드 기능을 도입합니다. [cite: 6, 7]</p></div>
+            <div class="promise-card"><h3>교복 스타일 개선</h3><p>점퍼 디자인 개선 및 정장형 교복을 비치하겠습니다. [cite: 8, 9]</p></div>
+            <div class="promise-card"><h3>자치권 강화</h3><p>동아리 연합회 결성으로 새로운 변화를 만듭니다. [cite: 10]</p></div>
         </div>
 
         <div class="career-box">
@@ -123,39 +58,31 @@
                 <li>대구강동초 학생회장 [cite: 12]</li>
                 <li>소선여중 학생회장 [cite: 13]</li>
                 <li>수성구 청소년참여위 부위원장 [cite: 14]</li>
-                <li>KAIST 영재기업인교육원 수료 [cite: 16]</li>
+                <li>KAIST 영재기업인 수료 [cite: 16]</li>
             </ul>
         </div>
     </section>
 
     <footer>
-        <p>Nexus DHI - 연결로 만드는 변화</p>
-        <p>© 2026 Student President Candidate Park So-jin</p>
+        <p>Nexus DHI - 연결로 만드는 변화 [cite: 1]</p>
+        <p>© 2026 Student President Candidate Park So-jin [cite: 2]</p>
     </footer>
 
     <script>
         window.addEventListener('scroll', () => {
             const container = document.querySelector('.sticky-container');
+            if(!container) return;
             const offset = window.pageYOffset - container.offsetTop;
             const progress = offset / window.innerHeight;
-
-            if (progress > 0 && progress < 2) {
+            if (progress > 0 && progress < 2.5) {
                 const left = document.getElementById('txt-left');
                 const right = document.getElementById('txt-right');
                 const middle = document.getElementById('txt-middle');
-
-                // 슬로건 합치기 로직
                 let pos = (progress * 50) - 50; 
                 if (pos > 0) pos = 0;
-                
                 left.style.left = `calc(50% + ${pos - 15}%)`;
                 right.style.right = `calc(50% + ${pos - 15}%)`;
-
-                if (progress > 1.2) {
-                    middle.style.opacity = (progress - 1.2) * 5;
-                } else {
-                    middle.style.opacity = 0;
-                }
+                if (progress > 1.2) { middle.style.opacity = (progress - 1.2) * 5; } else { middle.style.opacity = 0; }
             }
         });
     </script>
