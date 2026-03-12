@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus DHI Student Council Campaign</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #2a64e2;
+            --navy: #031b44;
+            --ivory: #f7f7f5;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--navy);
+            scroll-behavior: smooth;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 20;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: transparent;
+            color: var(--navy);
+        }
+        header.scrolled {
+            background-color: var(--navy);
+            color: white;
+        }
+        header .logo {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        header nav a {
+            margin-left: 32px;
+            color: inherit;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        header nav a:hover {
+            opacity: 0.8;
+        }
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        .hero img {
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain;
+            object-position: center;
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: var(--blue);
+            animation: bounce 1.5s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+        section {
+            padding: 100px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section-title {
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--blue);
+            margin-bottom: 10px;
+        }
+        section h2 {
+            font-size: 38px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--navy);
+        }
+        section p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #334;
+            margin-bottom: 12px;
+        }
+        /* Manifesto Section */
+        .manifesto ul {
+            list-style: none;
+            padding: 0;
+        }
+        .manifesto li {
+            background-color: var(--ivory);
+            padding: 20px 24px;
+            border-radius: 14px;
+            margin-bottom: 16px;
+            border-left: 6px solid var(--blue);
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        /* Experience Section */
+        .experience .items {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .experience .item {
+            background-color: var(--ivory);
+            padding: 20px 24px;
+            border-radius: 14px;
+            border-left: 6px solid var(--navy);
+            font-size: 16px;
+        }
+        /* CTA Section */
+        .cta {
+            background-color: var(--blue);
+            color: white;
+            text-align: center;
+            padding: 80px 40px;
+            border-radius: 12px;
+        }
+        .cta a {
+            display: inline-block;
+            background-color: var(--navy);
+            color: white;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 28px;
+            font-size: 16px;
+            margin-top: 24px;
+            transition: background-color 0.3s;
+        }
+        .cta a:hover {
+            background-color: #02102b;
+        }
+        /* Footer */
+        footer {
+            background-color: var(--navy);
+            color: white;
+            padding: 60px 80px;
+        }
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        footer p {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        @media (max-width: 900px) {
+            header {
+                padding: 20px 40px;
+            }
+            section {
+                padding: 80px 40px;
+            }
+        }
+        @media (max-width: 600px) {
+            header .logo {
+                font-size: 20px;
+            }
+            header nav a {
+                margin-left: 12px;
+                font-size: 14px;
+            }
+            section {
+                padding: 60px 24px;
+            }
+            section h2 {
+                font-size: 32px;
+            }
+            .manifesto li, .experience .item {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="top-header">
+        <div class="logo">Nexus DHI</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#message">Message</a>
+            <a href="#manifesto">Manifesto</a>
+            <a href="#experience">Experience</a>
+            <a href="#vision">Vision</a>
+            <a href="#contact">Join Us</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <!-- Poster hero image: maintain full view without cropping -->
+        <img src="poster.png" alt="Nexus DHI campaign poster">
+        <div class="scroll-indicator">Scroll ↓</div>
+    </section>
+
+        <!-- Candidate Message Section -->
+    <section class="message" id="message">
+        <div class="section-title">Message</div>
+        <h2>연결로 만드는 변화</h2>
+        <!-- Candidate's speech is presented in Korean, preserving the original tone and structure. -->
+        <p>안녕하십니까, 학생회장 후보 박소진입니다.</p>
+        <p>저는 이번 선거에서 ‘Nexus DHI — 연결로 만드는 변화’라는 슬로건을 제시했습니다. Nexus는 ‘연결’이라는 뜻입니다.</p>
+        <p>저는 학생과 학생, 아이디어와 기회, 그리고 우리 학교와 더 넓은 세상을 연결하는 학생자치를 만들어가고 싶습니다.</p>
+        <p>먼저, 우리의 아이디어를 세계와 연결하겠습니다.<br>
+        TEDxDHI를 개최하여 학생들의 생각과 경험이 더 넓은 세상과 만날 수 있는 무대를 만들겠습니다.</p>
+        <p>또한 배움의 기회를 연결하겠습니다.<br>
+        DHI 도전학기제를 통해 학생들이 직접 수업을 만들고 자신의 관심 분야를 탐구할 수 있도록 하겠습니다.</p>
+        <p>그리고 학교 생활의 편리함을 연결하겠습니다.<br>
+        디자인이 개선되고 체크카드 기능이 결합된 학생증을 통해 학생증이 실제로 사용되는 편리한 도구가 되도록 하겠습니다.</p>
+        <p>또한 학교의 정체성과 학생을 연결하겠습니다.<br>
+        학교 점퍼 디자인을 개선하여 대구국제고의 상징과 자부심을 담겠습니다.</p>
+        <p>학교 대표 활동에서는 학생과 학교의 품격을 연결하겠습니다.<br>
+        정장형 교복 대여를 통해 더 당당한 학교 대표 활동을 지원하겠습니다.</p>
+        <p>마지막으로 동아리와 동아리를 연결하겠습니다.<br>
+        동아리 연합회를 통해 서로 협력하고 성장하는 학생 공동체를 만들겠습니다.</p>
+        <p>저는 약속만 하는 후보가 아니라 실행으로 변화를 만드는 학생회장이 되겠습니다.<br>
+        감사합니다.</p>
+    </section>
+
+    <section class="manifesto" id="manifesto">
+        <div class="section-title">Our Manifesto</div>
+        <h2>Pledges to Connect and Transform</h2>
+        <p>Together we can create meaningful change. Our pledges focus on empowering students, improving our learning environment, and fostering a vibrant community.</p>
+        <ul>
+            <li>Host an official TEDx event at our school to share ideas and inspire innovation.</li>
+            <li>Introduce a student-led after‑school program and challenge semester where everyone can explore new interests.</li>
+            <li>Upgrade student ID cards with improved design and information, including a check-card feature for convenience.</li>
+            <li>Redesign our uniform jumper for comfort and style.</li>
+            <li>Provide blazer-style uniforms for formal occasions.</li>
+            <li>Establish a federation of clubs to strengthen collaboration and support across all student organisations.</li>
+        </ul>
+    </section>
+
+    <section class="experience" id="experience">
+        <div class="section-title">Experience</div>
+        <h2>Building on a Strong Foundation</h2>
+        <p>Our candidate has a proven record of leadership and service, bringing valuable experience to guide our student community.</p>
+        <div class="items">
+            <div class="item">Former student council president at an elementary school.</div>
+            <div class="item">Served as student council president at a girls’ middle school.</div>
+            <div class="item">Vice chair of a local youth participation committee, advocating for youth voices.</div>
+            <div class="item">Ambassador for cultural heritage initiatives in our community.</div>
+            <div class="item">Completed an entrepreneurship and innovation program for gifted students.</div>
+        </div>
+    </section>
+
+    <section class="vision" id="vision">
+        <div class="section-title">Vision</div>
+        <h2>Change Through Connection</h2>
+        <p>Our vision is to foster a school where every voice is heard and everyone feels connected. By building bridges between students, teachers and the community, we will create an environment of trust, respect and collaboration.</p>
+        <p>Together, we will encourage new initiatives, celebrate diversity and cultivate a school culture that empowers everyone to contribute.</p>
+    </section>
+
+    <section class="cta" id="contact">
+        <h2>Join Our Journey</h2>
+        <p>Be part of the change. Your support makes a difference and helps us build a brighter future for everyone.</p>
+        <a href="#home">Learn More</a>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Nexus DHI Campaign</p>
+        </div>
+    </footer>
+
+    <script>
+        // header background change on scroll
+        const header = document.getElementById('top-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        // reveal sections on scroll
+        const sections = document.querySelectorAll('section:not(.hero)');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
