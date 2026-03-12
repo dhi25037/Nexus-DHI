@@ -1,90 +1,323 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus DHI | 학생회장 후보 박소진</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
-    <style>
-        :root { --main-blue: #1d4ed8; --light-blue: #3b82f6; --bg-white: #ffffff; --text-dark: #1e293b; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Pretendard', sans-serif; color: var(--text-dark); background: var(--bg-white); line-height: 1.6; overflow-x: hidden; }
-        .hero-poster { height: 100vh; display: flex; justify-content: center; align-items: center; background: #f1f5f9; }
-        .hero-poster img { max-width: 90%; max-height: 80vh; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .sticky-container { height: 300vh; position: relative; background: var(--text-dark); }
-        .sticky-box { position: sticky; top: 0; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; color: white; }
-        .slogan-txt { position: absolute; font-size: clamp(2.5rem, 7vw, 6rem); font-weight: 900; transition: 0.1s; }
-        #txt-left { left: -50%; color: var(--light-blue); }
-        #txt-right { right: -50%; color: var(--light-blue); }
-        #txt-middle { opacity: 0; font-size: clamp(1.2rem, 3vw, 2.5rem); margin-top: 10px; }
-        .content { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
-        .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 60px; font-weight: 800; color: var(--main-blue); }
-        .promise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .promise-card { background: #f8fafc; padding: 40px; border-radius: 25px; border-left: 8px solid var(--main-blue); transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .promise-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-        .promise-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--main-blue); }
-        .career-box { background: var(--main-blue); color: white; padding: 60px 20px; border-radius: 30px; margin-top: 50px; }
-        .career-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .career-list li { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center; }
-        footer { text-align: center; padding: 60px; color: #94a3b8; }
-    </style>
-</head>
-<body>
+<html lang="en"><head>
+        <!-- 모든 페이지에 동일하게 적용 -->
+        <meta charset="UTF-8">
+        <link rel="icon" href="/img/favicon.png" type="image/x-icon">
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="/css/global.css?ver=1">
+        <title>SAGE World Cup</title>
 
-    <section class="hero-poster">
-        <img src="https://github.com/dhi25037/Nexus-DHI/blob/main/poster.png?raw=true" alt="박소진 포스터">
-    </section>
-    <div class="sticky-container">
-        <div class="sticky-box">
-            <div id="txt-left" class="slogan-txt">연결</div>
-            <div id="txt-middle" class="slogan-txt">로 만드는</div>
-            <div id="txt-right" class="slogan-txt">변화</div>
+        <!-- Navbar, Footer Stylesheet 경로 동일하게 적용 -->
+        <link rel="stylesheet" href="/css/modules.desktop.css?ver=1" class="desktop-css">
+        <link rel="stylesheet" href="/css/modules.mobile.css?ver=1" class="mobile-css" disabled="disabled">
+
+        <!-- 페이지마다 바꿀 것 -- Stylesheet -->
+        <link rel="stylesheet" href="/css/index.desktop.css?ver=1" class="desktop-css">
+        <link rel="stylesheet" href="/css/index.mobile.css?ver=1" class="mobile-css" disabled="disabled">
+
+        <!-- 페이지마다 로드 경로 변경할 것 -->
+        <script>
+            var link = "/web/index.html";
+        </script>
+
+        <!-- 모든 페이지에 동일하게 적용 -->
+        <script src="/js/transition.js?ver=1"></script>
+      </head>
+      
+      <body>
+          <div id="desktop" style="display: block;">
+<div id="container-desktop">
+    <div id="video-background-container">
+        <video autoplay="autoplay" loop="loop" muted="" defaultmuted="" playsinline="" oncontextmenu="return false;" preload="auto" id="video-background">
+            <source src="/img/index_bg_video.mp4" type="video/mp4" id="bg-video">
+        </video>
+    </div> 
+
+    <div id="navbar-desktop" class="dark"><div id="nav-content">
+    <div id="nav-left">
+        <div id="nav-logo" onclick="window.location.href = '/pages/index.html'">ONYUL</div>
+    </div>
+
+    <div id="nav-right">
+        <div class="nav-item" onclick="window.locatoin.href = '/pages/index.html'">About</div>
+        <div class="nav-item" onclick="window.location.href = '/pages/solution.html'">Solution</div>
+        <div class="nav-item" onclick="window.location.href = '/pages/team.html'">Team</div>
+        <div class="nav-item nav-button space" onclick="window.location.href = '/pages/contact.html'">CONTACT</div>
+    </div>
+</div>
+</div>
+
+    <div id="div-1" class="section">
+        <div class="section-content">
+            <div class="heading">Clear. Safe.<br>Fire free.</div>
+            <div class="description space">Onyul is pioneering a new way forward, uniting technology and purpose to<br>protect our forests and ensure a sustainable future on the earth.</div>
+            <div class="button dark" onclick="window.location.href = '/pages/index.html#div-3'">
+                <div class="button-text">Our Solution</div>
+                <img src="/img/arrow.png">
+            </div>
         </div>
     </div>
 
-    <section class="content">
-        <h2 class="section-title">주요 공약 리스트</h2>
-        <div class="promise-grid">
-            <div class="promise-card"><h3>TEDx DHI 개최</h3><p>우리들의 목소리를 세계로 연결하겠습니다. [cite: 3]</p></div>
-            <div class="promise-card"><h3>내 손으로 만드는 수업</h3><p>방과후 수업과 도전학기제 운영으로 선택권을 보장합니다. [cite: 4, 5]</p></div>
-            <div class="promise-card"><h3>디자인 혁신</h3><p>학생증 디자인 공모전 및 체크카드 기능을 도입합니다. [cite: 6, 7]</p></div>
-            <div class="promise-card"><h3>교복 스타일 개선</h3><p>점퍼 디자인 개선 및 정장형 교복을 비치하겠습니다. [cite: 8, 9]</p></div>
-            <div class="promise-card"><h3>자치권 강화</h3><p>동아리 연합회 결성으로 새로운 변화를 만듭니다. [cite: 10]</p></div>
+    <div id="div-6" class="section">
+        <div class="section-content">
+            <div class="bar-container"><div class="bar-focus"></div></div>
+            <div class="section-category subheading space">Problem</div>
+
+            <div class="heading">Plastic Bottles <br>Can Cause Wildfires.</div>
+            <div id="div-6-bottom">
+                <div id="div-6-bottom-left">
+                        <div class="number-container">
+                            <div class="number-div">
+                                <div class="number-left">158 cases</div>
+                                <div class="number-right">in Korea (~5y)</div>
+                            </div>
+                            <div class="number-divider"></div>
+                            <div class="number-div">
+                                <div class="number-left">$1,4M</div>
+                                <div class="number-right">loss in Korea (~5y)</div>
+                            </div>
+                        </div>
+                </div>
+                <div id="div-6-bottom-right">
+                    <img src="/img/index_plastic.png" id="div-6-plastic">
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="career-box">
-            <h2 style="text-align: center; margin-bottom: 30px;">박소진의 검증된 리더십</h2>
-            <ul class="career-list">
-                <li>대구강동초 학생회장 [cite: 12]</li>
-                <li>소선여중 학생회장 [cite: 13]</li>
-                <li>수성구 청소년참여위 부위원장 [cite: 14]</li>
-                <li>KAIST 영재기업인 수료 [cite: 16]</li>
-            </ul>
+    <div id="div-2" class="section section-dark">
+        <div class="section-content">
+            <div class="bar-container dark"><div class="bar-focus"></div></div>
+            <div class="section-category subheading space">Vision</div>
+
+            <div class="heading">Preventing Wildfires <br>Caused By Plastic Bottles.</div>
+            <div id="div-2-bottom">
+                <div id="div-2-bottom-left">
+                    <div class="description space">For a sustainable Earth and forests, ONYUL is forging a new path that unites technology and message.</div>
+                </div>
+                <div id="div-2-bottom-right" class="bg" style="background-image: url('/img/index_img_2.png')"></div>
+            </div>
         </div>
-    </section>
+    </div>
 
-    <footer>
-        <p>Nexus DHI - 연결로 만드는 변화 [cite: 1]</p>
-        <p>© 2026 Student President Candidate Park So-jin [cite: 2]</p>
-    </footer>
+    <div id="div-3" class="section">
+        <div class="section-content">
+            <div class="bar-container"><div class="bar-focus"></div></div>
+            <div class="section-category subheading space">Our Product</div>
 
-    <script>
-        window.addEventListener('scroll', () => {
-            const container = document.querySelector('.sticky-container');
-            if(!container) return;
-            const offset = window.pageYOffset - container.offsetTop;
-            const progress = offset / window.innerHeight;
-            if (progress > 0 && progress < 2.5) {
-                const left = document.getElementById('txt-left');
-                const right = document.getElementById('txt-right');
-                const middle = document.getElementById('txt-middle');
-                let pos = (progress * 50) - 50; 
-                if (pos > 0) pos = 0;
-                left.style.left = `calc(50% + ${pos - 15}%)`;
-                right.style.right = `calc(50% + ${pos - 15}%)`;
-                if (progress > 1.2) { middle.style.opacity = (progress - 1.2) * 5; } else { middle.style.opacity = 0; }
-            }
-        });
-    </script>
-</body>
-</html>
+            <div class="heading">Elegant Design,<br>Nothing Left Behind.</div>
+
+            <div class="div-3-container shadow">
+                <div class="bar-container-h"><div class="bar-focus-h"></div></div>
+                <div class="div-3-content">
+                    <div class="div-3-content-left">
+                        <div class="subheading space">Patented embossed pattern</div>
+                        <div class="number-container">
+                            <div class="number-div">
+                                <div class="number-left">75.5%</div>
+                                <div class="number-right">Density</div>
+                            </div>
+                            <div class="number-divider"></div>
+                            <div class="number-div">
+                                <div class="number-left">30%</div>
+                                <div class="number-right">Cost saving effect</div>
+                            </div>
+                        </div>
+
+                        <div class="description">Our patented embossed pattern technology increases surface efficiency, reduces
+material usage, and enhances durability—delivering smarter, more sustainable
+performance.</div>
+                        <div class="button" onclick="window.location.href = '/pages/solution.html'">
+                            <div class="button-text">Read More</div>
+                            <img src="/img/arrow.png">
+                        </div>
+                    </div>
+                    <div class="div-3-content-bg bg" style="background-image: url(&quot;/img/index_bg_3_1.png&quot;)"></div>
+                </div>
+            </div>
+
+            <div class="div-3-container">
+                <div class="div-3-content">
+                    <div class="div-3-content-bg bg" style="background-image: url(&quot;/img/index_bg_3_2.png&quot;)"></div>
+
+                    <div class="div-3-content-left">
+                        <div class="subheading space">Transparency</div>
+                        <div class="number-container">
+                            <div class="number-divider"></div>
+                            <div class="number-div">
+                                <div class="number-left">98%</div>
+                                <div class="number-right">Transparency of Bottle</div>
+                            </div>
+                        </div>
+
+                        <div class="description">Light transmission tests on our patterned PET bottle showed up to 98% transparency
+retention compared to conventional PET, as measured through the detection layer.</div>
+                        <div class="button" onclick="window.location.href = '/pages/solution.html'">
+                            <div class="button-text">Read More</div>
+                            <img src="/img/arrow.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="bar-container-h"><div class="bar-focus-h"></div></div>
+
+            </div>
+
+            <div class="div-3-container">
+                <div class="bar-container-h"><div class="bar-focus-h"></div></div>
+                <div class="div-3-content">
+                    <div class="div-3-content-left">
+                        <div class="subheading space">ESG Campaign</div>
+                        <div class="number-container">
+                            <div class="number-div">
+                                <div class="number-left">120%</div>
+                                <div class="number-right">Improved Consumer Awareness</div>
+                            </div>
+                            <div class="number-divider"></div>
+                            <div class="number-div">
+                                <div class="number-left">100%</div>
+                                <div class="number-right">Business Partner Satisfaction</div>
+                            </div>
+                        </div>
+
+                        <div class="description">Through strategic ESG consulting and marketing support, we help businesses align
+their growth with global sustainability goals. Our approach not only enhances brand
+credibility and stakeholder trust, but also drives long-term value by integrating
+environmental responsibility and social impact into core business strategies.
+By connecting innovation with purpose, we empower companies to lead meaningful
+change.</div>
+                        <div class="button" onclick="window.location.href = '/pages/solution.html'">
+                            <div class="button-text">Read More</div>
+                            <img src="/img/arrow.png">
+                        </div>
+                    </div>
+                    <div class="div-3-content-bg bg" style="background-image: url(&quot;/img/index_bg_3_3.png&quot;)"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="div-4" class="section section-dark">
+        <div class="section-content">
+            <div class="bar-container dark"><div class="bar-focus"></div></div>
+            <div class="section-category subheading space">Why Onyul</div>
+
+            <div class="heading">A Smarter Solution,<br>Powered by Innovation</div>
+            <div id="div-4-bottom">
+                <div id="div-4-bottom-left">
+                </div>
+                <div id="div-4-bottom-right">
+                    <div class="description space">Through global collaborations with national parks, our technology not only helps
+prevent wildfires but also contributes to preserving ecosystems and revitalizing
+local economies. By aligning innovation with sustainability, we’re building
+meaningful partnerships that protect nature and create shared value for
+communities around the world.</div>
+                    <div class="button dark" onclick="window.location.href = '/pages/contact.html'">
+                        <div class="button-text">Any Questions?</div>
+                        <img src="/img/arrow.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="bg section" id="div-4-bg" style="background-image: url('/img/index_bg_4.jpg')">
+        <div class="section-content">
+            <div class="expert-item">
+                <div class="expert-quote subheading heavy">"This project is something something something lorem ipsum."</div>
+                <div class="expert-name description space heavy">Joonsung Kim</div>
+                <div class="expert-obl description space light">Korea Science Academy of KAIST</div>
+            </div>
+            <div class="expert-item">
+                <div class="expert-quote subheading heavy">"This project is something something something lorem ipsum."</div>
+                <div class="expert-name description space heavy">Joonsung Kim</div>
+                <div class="expert-obl description space light">Korea Science Academy of KAIST</div>
+            </div>
+            <div class="expert-item">
+                <div class="expert-quote subheading heavy">"This project is something something something lorem ipsum."</div>
+                <div class="expert-name description space heavy">Joonsung Kim</div>
+                <div class="expert-obl description space light">Korea Science Academy of KAIST</div>
+            </div>
+        </div>
+    </div>
+    -->
+    <div id="div-5" class="section">
+        <div class="section-content">
+            <div class="bar-container"><div class="bar-focus"></div></div>
+            <div class="section-category subheading space">Business</div>
+
+            <div class="heading">Our Partners</div>
+            <div id="div-5-bottom">
+                <!--
+                <img class="div-5-companies" src="/img/cocacola.png">
+                <img class="div-5-companies" src="/img/samda.svg">
+                <img class="div-5-companies" src="/img/pulmuone.webp">
+            -->
+                <img class="div-5-companies" src="/img/index_partner_1.png" onclick="window.location.href = 'https://ksa.hs.kr'">
+                <img class="div-5-companies" src="/img/index_partner_2.webp" onclick="window.location.href = 'https://www.dimigo.hs.kr/'">
+            </div>
+    </div>
+
+
+
+</div>
+
+<div id="footer-desktop"><div id="footer-top">
+    <div class="footer-item">
+        <div class="footer-logo black">ONYUL</div>
+    </div>
+    <div class="footer-item">
+        <div class="footer-title space subheading black">Company</div>
+        <div class="footer-menu">
+            <div class="footer-menu-item description">About</div>
+            <div class="footer-menu-item description">Solution</div>
+            <div class="footer-menu-item description">Team</div>
+            <div class="footer-menu-item description">Contact</div>
+        </div>
+    </div>
+
+    <div class="footer-item">
+        <div class="footer-title space subheading black">Legal</div>
+        <div class="footer-menu">
+        <div class="footer-menu">
+            <div class="footer-menu-item description">Terms &amp; Conditions</div>
+            <div class="footer-menu-item description">Privacy Policy</div>
+        </div>
+        </div>
+    </div>
+
+    <div class="footer-item">
+        <div class="footer-title space subheading black">Social</div>
+        <div class="footer-menu">
+        <div class="footer-menu">
+            <div class="footer-menu-item description">YouTube</div>
+            <div class="footer-menu-item description">Instagram</div>
+            <div class="footer-menu-item description">X</div>
+        </div>
+        </div>
+    </div>
+
+    <div class="footer-item">
+        <div class="footer-title space subheading black">Contact</div>
+        <div class="footer-menu">
+        <div class="footer-menu">
+            <div class="footer-menu-item description">contact@onyulkorea.com</div>
+            <div class="footer-menu-item description">+82 10 4321 0936</div>
+            <div class="footer-menu-item description">105-47 Busanjin-gu<br>Baekyanggwanmun st.<br>Busan, Korea 47162</div>
+        </div>
+        </div>
+    </div>
+
+
+</div>
+<div id="footer-bottom">
+    © 2025 by ONYUL
+</div></div>
+
+<script>loadModules()</script></div></div>
+          <div id="mobile" style="display: none;">
+              <!-- 모바일 페이지가 로드되는 영역 -->
+          </div>
+      <script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;8198f392e52d45c2840a59f0d3c413cc&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+</body></html>
