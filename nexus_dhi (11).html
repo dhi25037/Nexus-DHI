@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus DHI - 기호 2번 박소진</title>
+    <link rel="icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #2a64e2;
+            --navy: #031b44;
+            --ivory: #f7f7f5;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--navy);
+            scroll-behavior: smooth;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 20;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: transparent;
+            color: var(--navy);
+        }
+        header.scrolled {
+            background-color: var(--navy);
+            color: white;
+        }
+        header .logo {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        header nav a {
+            margin-left: 32px;
+            color: inherit;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        header nav a:hover {
+            opacity: 0.8;
+        }
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        .hero img {
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain;
+            object-position: center;
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: var(--blue);
+            animation: bounce 1.5s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+        section {
+            padding: 100px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section-title {
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--blue);
+            margin-bottom: 10px;
+        }
+        section h2 {
+            font-size: 38px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--navy);
+        }
+        section p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #334;
+            margin-bottom: 12px;
+        }
+        /* Manifesto Section */
+        .manifesto ul {
+            list-style: none;
+            padding: 0;
+        }
+        .manifesto li {
+            background-color: var(--ivory);
+            padding: 20px 24px;
+            border-radius: 14px;
+            margin-bottom: 16px;
+            border-left: 6px solid var(--blue);
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        /* Experience Section */
+        .experience .items {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .experience .item {
+            background-color: var(--ivory);
+            padding: 20px 24px;
+            border-radius: 14px;
+            border-left: 6px solid var(--navy);
+            font-size: 16px;
+        }
+        /* Style for the introduction photo in the Introduction section */
+        /* Introduction section layout */
+        .intro-flex {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .intro-left {
+            flex: 0 0 40%;
+        }
+        .intro-left img {
+            width: 100%;
+            height: auto;
+            border-radius: 14px;
+        }
+        .intro-right {
+            flex: 1;
+        }
+        .intro-right p {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: var(--navy);
+        }
+        .intro-right ul {
+            list-style: disc inside;
+            padding-left: 0;
+            margin: 0;
+        }
+        .intro-right li {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #334;
+        }
+        @media (max-width: 768px) {
+            .intro-flex {
+                flex-direction: column;
+                align-items: center;
+            }
+            .intro-left, .intro-right {
+                flex: none;
+                width: 100%;
+            }
+        }
+
+        /* Styling for headings and lists inside introduction */
+        .intro-right h3 {
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: var(--navy);
+        }
+        .intro-right ul {
+            list-style: disc inside;
+            margin-top: 4px;
+            margin-bottom: 12px;
+            padding-left: 0;
+        }
+        .intro-right li {
+            margin-bottom: 6px;
+            font-size: 16px;
+            color: #334;
+        }
+
+        /* Tagline under the introduction heading */
+        .intro-tagline {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #334;
+            margin-bottom: 24px;
+        }
+        /* CTA Section */
+        .cta {
+            background-color: #bfc7ea;
+            color: var(--navy);
+            text-align: center;
+            padding: 80px 40px;
+            border-radius: 12px;
+        }
+        /* Previous CTA buttons removed and replaced with contact items */
+        .cta a {
+            /* fallback style for any remaining links in CTA */
+        }
+        /* Contact links layout */
+        .cta .contact-links {
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .cta .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            font-size: 18px;
+            color: var(--navy);
+        }
+        .cta .contact-item .icon {
+            font-size: 22px;
+            margin-right: 8px;
+        }
+        .cta .contact-item .label {
+            font-weight: 500;
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        .cta .contact-item a {
+            display: inline-block;
+            background-color: var(--navy);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .cta .contact-item a:hover {
+            background-color: #02102b;
+        }
+
+        /* Roadmap timeline styles */
+        .roadmap .timeline {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 40px 0;
+            margin-top: 20px;
+            border-top: 2px solid var(--blue);
+        }
+        .roadmap .timeline:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--blue);
+            transform: translateY(-50%);
+        }
+        .roadmap .timeline-item {
+            flex: 0 0 calc(100% / 12 - 8px);
+            text-align: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .roadmap .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--blue);
+            z-index: 1;
+        }
+        .roadmap .timeline-item .month {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--blue);
+            margin-bottom: 6px;
+        }
+        .roadmap .timeline-item .content {
+            font-size: 14px;
+            color: var(--navy);
+        }
+        @media (max-width: 900px) {
+            .roadmap .timeline {
+                flex-direction: column;
+                border: none;
+            }
+            .roadmap .timeline:after {
+                display: none;
+            }
+            .roadmap .timeline-item {
+                flex: none;
+                width: 100%;
+                margin-bottom: 24px;
+                text-align: left;
+                padding-left: 24px;
+                border-left: 2px solid var(--blue);
+            }
+            .roadmap .timeline-item::before {
+                left: 0;
+                transform: translateX(0);
+            }
+        }
+
+        /* Roadmap quarter tabs styles */
+        /* Roadmap quarter tabs as a horizontal timeline */
+        .roadmap .quarter-tabs {
+            position: relative;
+            height: 2px;
+            background-color: var(--blue);
+            margin: 30px 0 50px;
+        }
+        /* Position each quarter button along the line */
+        .roadmap .quarter-tabs .quarter-tab {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            background-color: var(--ivory);
+            border: 2px solid var(--blue);
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--navy);
+            transition: background-color 0.3s, color 0.3s;
+            z-index: 1;
+        }
+        /* Adjust left positions to reduce spacing between buttons */
+        .roadmap .quarter-tabs .quarter-tab:nth-child(1) {
+            left: 10%;
+        }
+        .roadmap .quarter-tabs .quarter-tab:nth-child(2) {
+            left: 37%;
+        }
+        .roadmap .quarter-tabs .quarter-tab:nth-child(3) {
+            left: 64%;
+        }
+        .roadmap .quarter-tabs .quarter-tab:nth-child(4) {
+            left: 90%;
+            /* Align the last button fully inside the line */
+            transform: translate(-100%, -50%);
+        }
+        .roadmap .quarter-tab.active {
+            background-color: var(--blue);
+            color: white;
+        }
+        .roadmap .quarter-content {
+            display: none;
+            margin-top: 24px;
+            border: 1px solid #e5e5e5;
+            border-radius: 14px;
+            padding: 24px;
+            background-color: var(--ivory);
+        }
+        .roadmap .quarter-content.active {
+            display: block;
+        }
+        .roadmap .quarter-content h3 {
+            font-size: 20px;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+        .roadmap .quarter-content ul {
+            list-style: disc inside;
+            padding-left: 0;
+            margin: 0;
+        }
+        .roadmap .quarter-content li {
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #334;
+        }
+        /* Footer */
+        footer {
+            background-color: var(--navy);
+            color: white;
+            padding: 60px 80px;
+        }
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        footer p {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        @media (max-width: 900px) {
+            header {
+                padding: 20px 40px;
+            }
+            section {
+                padding: 80px 40px;
+            }
+        }
+        @media (max-width: 600px) {
+            header .logo {
+                font-size: 20px;
+            }
+            header nav a {
+                margin-left: 12px;
+                font-size: 14px;
+            }
+            section {
+                padding: 60px 24px;
+            }
+            section h2 {
+                font-size: 32px;
+            }
+            .manifesto li, .experience .item {
+                font-size: 14px;
+            }
+        }
+    
+        /* Pledge slider */
+        .manifesto .pledge-container {
+            margin-top: 40px;
+        }
+        .manifesto .pledge {
+            background-color: var(--ivory);
+            border-radius: 14px;
+            padding: 40px 32px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .manifesto .pledge.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .manifesto .pledge-number {
+            font-size: 14px;
+            color: var(--blue);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .manifesto .pledge h3 {
+            font-size: 26px;
+            color: var(--blue);
+            margin-bottom: 6px;
+        }
+        .manifesto .pledge h4 {
+            font-size: 20px;
+            color: var(--navy);
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+        .manifesto .pledge p {
+            font-size: 16px;
+            color: #334;
+            line-height: 1.6;
+        }
+        @media (min-width: 768px) {
+            .manifesto .pledge {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 40px;
+            }
+            .manifesto .pledge h3, .manifesto .pledge h4, .manifesto .pledge-number, .manifesto .pledge p {
+                flex-basis: 100%;
+            }
+        }
+        /* Updated pledge cards layout */
+        .manifesto .pledge-container {
+            margin-top: 40px;
+        }
+        .manifesto .pledge {
+            display: flex;
+            align-items: flex-start;
+            background-color: var(--ivory);
+            border: 1px solid #e5e5e5;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .manifesto .pledge.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .manifesto .pledge .number {
+            flex: 0 0 80px;
+            font-size: 14px;
+            color: var(--blue);
+            font-weight: 500;
+        }
+        .manifesto .pledge .title {
+            flex: 0 0 260px;
+            padding: 0 20px;
+        }
+        .manifesto .pledge .title h3 {
+            font-size: 22px;
+            color: var(--blue);
+            margin-bottom: 4px;
+        }
+        .manifesto .pledge .title h4 {
+            font-size: 20px;
+            color: var(--navy);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .manifesto .pledge .desc {
+            flex: 1;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #334;
+        }
+        /* Alternate layout for even cards */
+        .manifesto .pledge:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        .manifesto .pledge:nth-child(even) .number {
+            text-align: right;
+        }
+        .manifesto .pledge:nth-child(even) .title {
+            padding: 0 20px;
+        }
+        @media (max-width: 768px) {
+            .manifesto .pledge {
+                flex-direction: column;
+            }
+            .manifesto .pledge .number, .manifesto .pledge .title, .manifesto .pledge .desc {
+                flex: none;
+                width: 100%;
+                padding: 0;
+                margin-bottom: 12px;
+            }
+            .manifesto .pledge:nth-child(even) {
+                flex-direction: column;
+            }
+        }
+
+        /* Redesigned pledge cards to resemble OnYul product section */
+        .manifesto .pledge {
+            position: relative;
+            display: flex;
+            align-items: stretch;
+            background: #fdfdf9;
+            border-radius: 18px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 0;
+        }
+        .manifesto .pledge:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        .manifesto .pledge .left {
+            flex: 1;
+            min-height: 320px;
+        }
+        .manifesto .pledge .left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .manifesto .pledge .right {
+            flex: 1.3;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .manifesto .pledge .right .pledge-number {
+            font-size: 14px;
+            color: var(--blue);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .manifesto .pledge .right h3 {
+            font-size: 28px;
+            color: var(--blue);
+            margin-bottom: 6px;
+        }
+        .manifesto .pledge .right h4 {
+            font-size: 20px;
+            color: var(--navy);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .manifesto .pledge .right p {
+            font-size: 16px;
+            color: #334;
+            line-height: 1.7;
+        }
+        @media (max-width: 768px) {
+            .manifesto .pledge {
+                flex-direction: column;
+            }
+            .manifesto .pledge:nth-child(even) {
+                flex-direction: column;
+            }
+            .manifesto .pledge .left {
+                min-height: 200px;
+            }
+            .manifesto .pledge .right {
+                padding: 24px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header id="top-header">
+        <div class="logo">Nexus DHI</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#message">Message</a>
+            <a href="#manifesto">Manifesto</a>
+            <a href="#experience">Introduction</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <!-- Poster hero image: maintain full view without cropping -->
+        <img src="poster.png" alt="Nexus DHI campaign poster">
+        <div class="scroll-indicator">Scroll ↓</div>
+    </section>
+
+        <!-- Candidate Message Section -->
+    <section class="message" id="message">
+        <div class="section-title">Message</div>
+        <h2>연결로 만드는 변화</h2>
+        <!-- Candidate's speech is presented in Korean, preserving the original tone and structure. -->
+        <p>안녕하십니까, 학생회장 후보 박소진입니다.</p>
+        <p>저는 이번 선거에서 ‘Nexus DHI — 연결로 만드는 변화’라는 슬로건을 제시했습니다. Nexus는 ‘연결’이라는 뜻입니다.</p>
+        <p>저는 학생과 학생, 아이디어와 기회, 그리고 우리 학교와 더 넓은 세상을 연결하는 학생자치를 만들어가고 싶습니다.</p>
+        <p>먼저, 우리의 아이디어를 세계와 연결하겠습니다.<br>
+        TEDxDHI를 개최하여 학생들의 생각과 경험이 더 넓은 세상과 만날 수 있는 무대를 만들겠습니다.</p>
+        <p>또한 배움의 기회를 연결하겠습니다.<br>
+        DHI 도전학기제를 통해 학생들이 직접 수업을 만들고 자신의 관심 분야를 탐구할 수 있도록 하겠습니다.</p>
+        <p>그리고 학교 생활의 편리함을 연결하겠습니다.<br>
+        디자인이 개선되고 체크카드 기능이 결합된 학생증을 통해 학생증이 실제로 사용되는 편리한 도구가 되도록 하겠습니다.</p>
+        <p>또한 학교의 정체성과 학생을 연결하겠습니다.<br>
+        학교 점퍼 디자인을 개선하여 대구국제고의 상징과 자부심을 담겠습니다.</p>
+        <p>학교 대표 활동에서는 학생과 학교의 품격을 연결하겠습니다.<br>
+        정장형 교복 대여를 통해 더 당당한 학교 대표 활동을 지원하겠습니다.</p>
+        <p>마지막으로 동아리와 동아리를 연결하겠습니다.<br>
+        동아리 연합회를 통해 서로 협력하고 성장하는 학생 공동체를 만들겠습니다.</p>
+        <p>저는 약속만 하는 후보가 아니라 실행으로 변화를 만드는 학생회장이 되겠습니다.<br>
+        감사합니다.</p>
+    </section>    <section class="manifesto" id="manifesto">
+        <div class="section-title">Manifesto</div>
+        <h2>변화를 만드는 약속</h2>
+        <div class="pledge-container">
+            <!-- Pledge 1 -->
+            <div class="pledge">
+                <div class="left">
+                    <img src="133c255a-3303-4e4d-9b31-546a52f57cf1.png" alt="TEDxDHI image">
+                </div>
+                <div class="right">
+                    
+                    <h3>우리의 아이디어가 세계로</h3>
+                    <h4>TEDxDHI 공식 개최</h4>
+                    <p>TEDxDHI를 공식적으로 개최하여 학생들의 창의적인 생각과 경험이 세계와 만나는 장을 만들겠습니다. 우리 학교의 목소리를 세계 무대로 연결해 더 넓은 네트워크를 형성하고, 새로운 아이디어가 성장하는 토양을 제공하겠습니다.</p>
+                </div>
+            </div>
+            <!-- Pledge 2 -->
+            <div class="pledge">
+                <div class="left">
+                    <img src="1ba11b41-c388-422c-8108-6ff7235538f2.png" alt="DHI Challenge Semester image">
+                </div>
+                <div class="right">
+                    
+                    <h3>우리가 직접 만드는 수업</h3>
+                    <h4>DHI 도전학기제</h4>
+                    <p>학생들이 직접 설계하고 운영하는 방과후 수업과 도전학기제를 도입하여, 스스로 원하는 과목을 개설하고 다양한 분야를 탐구할 수 있도록 돕겠습니다. 참여를 통해 자기주도적 학습 능력을 키우고, 창의적 도전을 장려하겠습니다.</p>
+                </div>
+            </div>
+            <!-- Pledge 3 -->
+            <div class="pledge">
+                <div class="left">
+                    <img src="22a51bad-f57d-44b8-9193-144927849fd4.png" alt="Student ID card image">
+                </div>
+                <div class="right">
+                    
+                    <h3>학생증이 일상 속 편리함으로</h3>
+                    <h4>체크카드 기능 학생증</h4>
+                    <p>디자인과 정보가 개선된 학생증에 체크카드 기능을 결합하여 교내외에서 간편하게 사용 가능한 만능 카드로 발전시키겠습니다. 이를 통해 지갑 한 장으로 인증과 결제가 가능해지는 편리한 학교 생활을 만들겠습니다.</p>
+                </div>
+            </div>
+            <!-- Pledge 4 -->
+            <div class="pledge">
+                <div class="left">
+                    <img src="9bc9fa49-6078-488a-aab7-f067c4d02e54.png" alt="Uniform jumper design image">
+                </div>
+                <div class="right">
+                    
+                    <h3>DHI의 자부심을 입다</h3>
+                    <h4>교복 점퍼 디자인 개선</h4>
+                    <p>우리 학교의 상징성과 자부심을 담은 새로운 점퍼 디자인을 만들겠습니다. 학생들의 의견을 수렴하여 더 편안하고 세련된 교복 점퍼를 제공하고, 학교의 정체성을 잘 표현할 수 있도록 하겠습니다.</p>
+                </div>
+            </div>
+            <!-- Pledge 5 -->
+            <div class="pledge">
+                <div class="left">
+                    <img src="7b086c7e-33cf-4bbf-a7df-7f5abe2e6445.png" alt="Formal uniform rental image">
+                </div>
+                <div class="right">
+                    
+                    <h3>학교 대표 활동이 더 당당하게</h3>
+                    <h4>정장형 교복 대여</h4>
+                    <p>교내외 공식 행사에 적합한 정장형 교복을 대여하여 학교 대표 활동에서 더 당당하게 설 수 있도록 지원하겠습니다. 학생들은 자신감 있게 학교를 대표하고, 학교 이미지 또한 높일 수 있습니다.</p>
+                </div>
+            </div>
+            <!-- Pledge 6 -->
+            <div class="pledge">
+                <div class="left">
+                    <img src="poster.png" alt="Club federation image">
+                </div>
+                <div class="right">
+                    
+                    <h3>동아리를 하나의 공동체로</h3>
+                    <h4>동아리 연합회 결성</h4>
+                    <p>모든 동아리를 연결하는 연합회를 결성하여 서로의 활동을 지원하고 협력할 수 있는 구조를 만들겠습니다. 이를 통해 동아리 간 소통을 활성화하고, 새로운 공동 프로젝트와 행사를 추진할 수 있습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="experience" id="experience">
+        <div class="section-title">Introduction</div>
+        <!-- Updated heading with line break for personal touch -->
+        <h2>준비된 학생회장,<br>저는 여러분의 박소진입니다.</h2>
+        <!-- Tagline under the heading -->
+        <p class="intro-tagline">다양한 활동과 리더십 경험을 바탕으로, 학생 여러분의 의견을 경청하고 함께 성장할 준비가 되어 있습니다.</p>
+        <!-- Horizontal card layout for candidate introduction -->
+        <div class="intro-flex">
+        <div class="intro-left">
+            <img src="profile.png" alt="Candidate photo" class="intro-photo">
+        </div>
+        <div class="intro-right">
+            <h3>주요 이력</h3>
+            <ul>
+                <li>前 소선여자중학교 학생회장</li>
+                <li>前 대구강동초등학교 학생회장</li>
+                <li>前 수성구 청소년참여위원회 부위원장</li>
+                <li>前 한국 문화유산 홍보대사</li>
+                <li>KAIST IP 영재기업인교육원 수료</li>
+            </ul>
+            <h3>활동 및 프로젝트</h3>
+            <ul>
+                <li>육각형 인재 프로젝트 기획 및 총괄<br>(인성·진로·학업·건강·행복 등 6개 영역 학생자치 프로그램 운영)</li>
+                <li>수성구자원봉사센터 연계 걸음동무 등굣길 캠페인 운영</li>
+                <li>중학교 축제 및 가요제 기획·운영 총괄</li>
+                <li>공약이행사업으로 중학교 교내 스터디카페 조성 및 운영</li>
+                <li>대구광역시 수성구 청소년 포럼 대표 연사</li>
+                <li>대구 청소년 IT·코딩 교육 확대 정책 제안</li>
+                <li>청문청답 구청장 간담회 사회</li>
+            </ul>
+            <h3>수상 및 성과</h3>
+            <ul>
+                <li>대구광역시 정책제안대회 대상</li>
+                <li>과학기술정보통신부 장관상</li>
+                <li>대구광역시 교육감 등 모범학생 표창 다수</li>
+                <li>청소년 자기도전 포상 동장</li>
+                <li>특허 4건 출원</li>
+                <li>정보처리기능사 자격증 취득</li>
+                <li>그 외 수상이력 다수</li>
+            </ul>
+        </div>
+        </div>
+    </section>
+
+    <section class="roadmap" id="roadmap">
+        <div class="section-title">Roadmap</div>
+        <h2>공약이행사업 연간계획</h2>
+        <p>학생회 공약 이행을 분기별로 계획했습니다. 탭을 선택하면 각 분기에 진행될 사업을 볼 수 있습니다.</p>
+        <div class="quarter-tabs">
+            <button class="quarter-tab active" data-target="q1">1분기 (3~5월)</button>
+            <button class="quarter-tab" data-target="q2">2분기 (6~8월)</button>
+            <button class="quarter-tab" data-target="q3">3분기 (9~11월)</button>
+            <button class="quarter-tab" data-target="q4">4분기 (12~2월)</button>
+        </div>
+        <div class="quarter-content active" id="q1">
+            <h3>1분기 공약 실행 기반 구축</h3>
+            <ul>
+                <li>3월 학생총회에서 공약이행사업 심의</li>
+                <li>TEDxDHI 라이선스 취득 추진 및 운영팀 구성</li>
+                <li>은행과 업무협약(MOU) 체결, 학생증 디자인 공모전 및 체크카드 기능 학생증 발급</li>
+                <li>교복 점퍼 디자인을 위한 수요조사, 디자인 공모전 및 투표, 행정 절차 진행</li>
+                <li>정장형 교복 대여 사업 즉시 시행</li>
+                <li>동아리 연합회 조직 구성 및 의견 전달 창구 구축</li>
+                <li>DHI 도전학기제 프로그램 기획 및 운영 설계, 학생 강좌 제안 공모, 방학 프로그램 준비</li>
+            </ul>
+        </div>
+        <div class="quarter-content" id="q2">
+            <h3>2분기 프로그램 준비 및 운영</h3>
+            <ul>
+                <li>TEDxDHI 강연자 확정, 행사 프로그램 기획 및 홍보 준비</li>
+                <li>동아리 의견 수렴 체계 운영 및 학교와 정례 소통 창구 마련</li>
+                <li>DHI 도전학기제 여름방학 방과후 프로그램 운영</li>
+            </ul>
+        </div>
+        <div class="quarter-content" id="q3">
+            <h3>3분기 대표 사업 실행</h3>
+            <ul>
+                <li>10월 학술제와 연계하여 TEDxDHI 공식 개최</li>
+                <li>DHI 도전학기제 여름 운영 결과 분석 및 프로그램 개선·확대 계획 수립</li>
+            </ul>
+        </div>
+        <div class="quarter-content" id="q4">
+            <h3>4분기 평가 및 정착</h3>
+            <ul>
+                <li>공약 실행 결과 공개 및 학생 만족도 조사</li>
+                <li>지속 운영 방안 마련</li>
+                <li>DHI 도전학기제 겨울방학 프로그램 운영</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="cta" id="contact">
+        <h2>Contact</h2>
+        <p>문의 사항이나, 제안이 있다면 언제든 편하게 연락주세요!<br>언제나 여러분의 목소리를 기다립니다.</p>
+        <div class="contact-links">
+            <div class="contact-item">
+                <span class="icon">✉️</span>
+                <span class="label">email:</span>
+                <a href="mailto:25037@dhi.hs.kr">25037@dhi.hs.kr</a>
+            </div>
+            <div class="contact-item">
+                <span class="icon">📷</span>
+                <span class="label">instagram:</span>
+                <a href="https://www.instagram.com/imymemine.u/" target="_blank">@imymemine.u</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 학생회장 기호 2번 박소진</p>
+        </div>
+    </footer>
+
+    <script>
+        // header background change on scroll
+        const header = document.getElementById('top-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        // reveal sections on scroll
+        const sections = document.querySelectorAll('section:not(.hero)');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        
+        // reveal pledge cards on scroll (updated)
+        const pledgeCards = document.querySelectorAll('.manifesto .pledge');
+        const pledgeObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    pledgeObs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        pledgeCards.forEach(card => {
+            pledgeObs.observe(card);
+        });
+
+        // Roadmap quarter tab interactions
+        const roadTabs = document.querySelectorAll('.roadmap .quarter-tab');
+        const roadContents = document.querySelectorAll('.roadmap .quarter-content');
+        roadTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                roadTabs.forEach(t => t.classList.remove('active'));
+                roadContents.forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                const targetId = tab.getAttribute('data-target');
+                const targetContent = document.getElementById(targetId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
