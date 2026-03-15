@@ -7,6 +7,9 @@
     <link rel="icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+    <!-- Preconnects to improve font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -20,9 +23,16 @@
             padding: 0;
         }
         body {
-            font-family: 'Poppins', sans-serif;
+            /* Use system font fallback for better cross-platform consistency */
+            /* Use Poppins as primary font, fallback to Noto Sans KR for Korean text, then system sans-serif. */
+            font-family: 'Poppins', 'Noto Sans KR', sans-serif;
             color: var(--navy);
             scroll-behavior: smooth;
+            /* Improve font rendering consistency across devices */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-text-size-adjust: 100%;
+            text-rendering: optimizeLegibility;
         }
         header {
             position: fixed;
@@ -354,6 +364,10 @@
             font-weight: 500;
             cursor: pointer;
             color: var(--navy);
+            /* Allow text to wrap for multi-line labels */
+            white-space: normal;
+            text-align: center;
+            line-height: 1.3;
             transition: background-color 0.3s, color 0.3s;
             z-index: 1;
         }
@@ -435,11 +449,21 @@
             section {
                 padding: 60px 24px;
             }
+            /* Reduce heading sizes slightly for small screens */
             section h2 {
-                font-size: 32px;
+                font-size: 28px;
             }
-            .manifesto li, .experience .item {
-                font-size: 14px;
+            /* Adjust font sizes for body text and lists to enhance readability on phones */
+            section p {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+            .manifesto li, .experience .item, .manifesto .pledge .right p {
+                font-size: 15px;
+            }
+            .manifesto .pledge .right h3,
+            .manifesto .pledge .right h4 {
+                font-size: 18px;
             }
         }
     
@@ -637,6 +661,25 @@
             }
         }
 
+        /* Pledges without images fill the width */
+        .manifesto .pledge.no-image .right {
+            flex: 1;
+            padding: 40px;
+        }
+
+        /* Enlarge the image area for the 1st, 3rd and 4th pledges */
+        .manifesto .pledge:nth-of-type(1) .left,
+        .manifesto .pledge:nth-of-type(3) .left,
+        .manifesto .pledge:nth-of-type(4) .left {
+            /* allocate more space to the image on these cards */
+            flex: 2;
+        }
+        .manifesto .pledge:nth-of-type(1) .right,
+        .manifesto .pledge:nth-of-type(3) .right,
+        .manifesto .pledge:nth-of-type(4) .right {
+            flex: 1;
+        }
+
     </style>
 </head>
 <body>
@@ -697,7 +740,9 @@
                 </div>
             </div>
             <!-- Pledge 2 -->
-            <div class="pledge">  
+            <!-- This pledge has no image; wrap the content in a .right container and assign the no-image class -->
+            <div class="pledge no-image">
+                <div class="right">
                     <h3>우리가 직접 만드는 수업</h3>
                     <h4>DHI 도전학기제</h4>
                     <p>학생들이 직접 설계하고 운영하는 방과후 수업과 도전학기제를 도입하여, 스스로 원하는 과목을 개설하고 다양한 분야를 탐구할 수 있도록 돕겠습니다. 참여를 통해 자기주도적 학습 능력을 키우고, 창의적 도전을 장려하겠습니다.</p>
@@ -728,24 +773,16 @@
                 </div>
             </div>
             <!-- Pledge 5 -->
-            <div class="pledge">
-                <div class="left">
-                    <img src="7b086c7e-33cf-4bbf-a7df-7f5abe2e6445.png" alt="Formal uniform rental image">
-                </div>
+            <div class="pledge no-image">
                 <div class="right">
-                    
                     <h3>학교 대표 활동이 더 당당하게</h3>
                     <h4>정장형 교복 대여</h4>
                     <p>교내외 공식 행사에 적합한 정장형 교복을 대여하여 학교 대표 활동에서 더 당당하게 설 수 있도록 지원하겠습니다. 학생들은 자신감 있게 학교를 대표하고, 학교 이미지 또한 높일 수 있습니다.</p>
                 </div>
             </div>
             <!-- Pledge 6 -->
-            <div class="pledge">
-                <div class="left">
-                    <img src="poster.png" alt="Club federation image">
-                </div>
+            <div class="pledge no-image">
                 <div class="right">
-                    
                     <h3>동아리를 하나의 공동체로</h3>
                     <h4>동아리 연합회 결성</h4>
                     <p>모든 동아리를 연결하는 연합회를 결성하여 서로의 활동을 지원하고 협력할 수 있는 구조를 만들겠습니다. 이를 통해 동아리 간 소통을 활성화하고, 새로운 공동 프로젝트와 행사를 추진할 수 있습니다.</p>
@@ -803,10 +840,11 @@
         <h2>공약이행사업 연간계획</h2>
         <p>학생회 공약 이행을 분기별로 계획했습니다. 탭을 선택하면 각 분기에 진행될 사업을 볼 수 있습니다.</p>
         <div class="quarter-tabs">
-            <button class="quarter-tab active" data-target="q1">1분기  (3~5월) </button>
-            <button class="quarter-tab" data-target="q2">2분기  (6~8월) </button>
-            <button class="quarter-tab" data-target="q3">3분기  (9~11월) </button>
-            <button class="quarter-tab" data-target="q4">4분기  (12~2월) </button>
+            <!-- Roadmap quarter labels show the quarter on the first line and the month range on the second line -->
+            <button class="quarter-tab active" data-target="q1">1분기<br>3월~5월</button>
+            <button class="quarter-tab" data-target="q2">2분기<br>6월~8월</button>
+            <button class="quarter-tab" data-target="q3">3분기<br>9월~11월</button>
+            <button class="quarter-tab" data-target="q4">4분기<br>12월~2월</button>
         </div>
         <div class="quarter-content active" id="q1">
             <h3>1분기 공약 실행 기반 구축</h3>
